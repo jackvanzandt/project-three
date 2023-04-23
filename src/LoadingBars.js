@@ -26,32 +26,19 @@ export class LoadingBars extends LitElement {
     border-radius: 8px;
   }
 
-  .loading-bar {
-    width: 0;
-    height: 8px;
-    background-color: #4CAF50;
-    position: absolute;
-    animation: loading 2s linear infinite;
-    border-radius: 8px;
-  }
-
-  @keyframes loading {
-    0% { left: -100%; }
-    100% { left: 100%; }
-  }
 `;
 
 render() {
     return html`
       <div class="loading-container">
         <div class="loading">
-          <div class="loading-bar"></div>
+          
         </div>
         <div class="loading">
-          <div class="loading-bar"></div>
+          
         </div>
         <div class="loading">
-          <div class="loading-bar"></div>
+          
         </div>
       </div>
     `;
