@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@lrnwebcomponents/intersection-element": "^4.0.4",
+    "@lrnwebcomponents/simple-progress": "^4.2.0",
     "lit": "^2.0.2"
   },
   "devDependencies": {
