@@ -95,6 +95,11 @@ h1 {
   100% { left: 100%; }
     }
 
+.tablinks.active {
+  color: orange;
+  border-bottom: 2px solid orange;
+}
+
 `;
 
 render() {
@@ -132,6 +137,12 @@ render() {
   </div>    
   `;
 }
+
+firstUpdated() {
+  const firstTabButton = this.shadowRoot.querySelector(".tablinks");
+  this.openTab({ currentTarget: firstTabButton }, 'cold-start');
+}
+
 openTab(e, tabName) {
   const tabcontent = this.shadowRoot.querySelectorAll(".tabcontent");
   const currentTab = this.shadowRoot.getElementById(tabName);
