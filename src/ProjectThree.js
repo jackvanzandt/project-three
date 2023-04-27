@@ -147,17 +147,15 @@ openTab(e, tabName) {
       }
       e.currentTarget.classList.remove("active");
   } else {
-      // Otherwise, hide all tabs
+
       for (let i = 0; i < tabcontent.length; i++) {
           tabcontent[i].style.display = "none";
       }
       
-      // Remove the "active" class from all buttons
       for (let i = 0; i < tablinks.length; i++) {
           tablinks[i].classList.remove("active");
       }
 
-      // Display the current tab and add the "active" class to the clicked button
       currentTab.style.display = "block";
       e.currentTarget.classList.add("active");
   }

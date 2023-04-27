@@ -53,7 +53,7 @@ export class LoadingAnimation extends LitElement {
       if (this.progress >= 100) {
         this.stopLoading();
       }
-    }, this.time * 10); // Adjust this value as per your need
+    }, this.time * 10);
   }
 
   stopLoading() {
