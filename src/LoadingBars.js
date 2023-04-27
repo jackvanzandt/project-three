@@ -10,12 +10,14 @@ export class LoadingBars extends LitElement {
   static get properties() {
     return{
         tabTimes: {type: Array},
+        tabId: {type: Number},
     };
   }
 
 constructor() {
     super();
     this.tabTimes = loadingTimes[0];
+    this.tabId = 0;
 }
 
   static styles = css`
@@ -58,17 +60,19 @@ constructor() {
 
 setTabTimes(tabIndex) {
     this.tabTimes = loadingTimes[tabIndex];
+    this.tabId = Date.now();
     this.requestUpdate();
   }
+  
 
-render() {
+  render() {
     return html`
       <div class="loading-container">
-        ${this.tabTimes.map(item => html`
+        ${this.tabTimes.map((item, index) => html`
           <div class="loading-row">
             <div class="loading-label">${item.name}</div>
             <div class="loading">
-              <loading-animation time="${item.time}"></loading-animation>
+              <loading-animation .time="${item.time}" .tabId="${this.tabId}"></loading-animation>
             </div>
           </div>
         `)}
