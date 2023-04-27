@@ -44,7 +44,7 @@ constructor() {
   }
   .loading {
     flex-grow: 1;
-    height: 20px;
+    height: 50px;
     background-color: #f3f3f3;
     position: relative;
     overflow: hidden;
@@ -52,7 +52,7 @@ constructor() {
     border-radius: 5px;
   }
   .loading-bar {
-    height: 20px;
+    height: 30px;
     position: absolute;
     border-radius: 5px;
   }
@@ -67,16 +67,17 @@ setTabTimes(tabIndex) {
 
   render() {
     return html`
-      <div class="loading-container">
-        ${this.tabTimes.map((item, index) => html`
-          <div class="loading-row">
-            <div class="loading-label">${item.name}</div>
-            <div class="loading">
-              <loading-animation .time="${item.time}" .tabId="${this.tabId}"></loading-animation>
-            </div>
+    <div class="loading-container">
+      ${this.tabTimes.map((item, index) => html`
+        <div class="loading-row">
+          <div class="loading-label">${item.name}</div>
+          <div class="loading">
+            <loading-animation .time="${item.time}" .tabId="${this.tabId}"></loading-animation>
+            <div class="loading-time"></div>
           </div>
-        `)}
-      </div>
+        </div>
+      `)}
+    </div>
     `;
   }
   
