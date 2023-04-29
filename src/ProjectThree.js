@@ -15,7 +15,6 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f5f5f5;
   }
 .content {
   text-align: center;
@@ -56,6 +55,9 @@ p {
 }
 .fade-text {
   text-align: center;
+  background: linear-gradient(to right, yellow, orange);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 .intro-text {
   text-align: center;
@@ -77,20 +79,11 @@ p {
   position: relative;
   overflow: hidden;
     }
-.loading-bar {
-  width: 0;
-  height: 4px;
-  background-color: #4CAF50;
-  position: absolute;
-  animation: loading 2s linear infinite;
-    }
+
 .tabcontent {
   display: none;
   }
-@keyframes loading {
-  0% { left: -100%; }
-  100% { left: 100%; }
-    }
+
 .tablinks.active {
   color: orange;
   border-bottom: 2px solid orange;
@@ -145,21 +138,17 @@ openTab(e, tabName, tabIndex) {
   const tablinks = this.shadowRoot.querySelectorAll(".tablinks");
   const currentTab = this.shadowRoot.getElementById(tabName);
 
-  // Hide all tabs
   for (let i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
 
-  // Remove the "active" class from all buttons
   for (let i = 0; i < tablinks.length; i++) {
     tablinks[i].classList.remove("active");
   }
 
-  // Display the current tab and add the "active" class to the clicked button
   currentTab.style.display = "block";
   e.currentTarget.classList.add("active");
 
-  // Get the loading-bars component in the current tab and update its tabTimes
   const loadingBarsElement = this.shadowRoot.querySelector(`#loading-bars-${tabName}`);
   loadingBarsElement.setTabTimes(tabIndex);
 }

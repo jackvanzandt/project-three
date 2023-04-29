@@ -9,6 +9,7 @@ export class LoadingAnimation extends LitElement {
   static get properties() {
     return {
       time: { type: Number },
+      tabTime: {type: Number},
       progress: { type: Number },
       intervalId: { type: Object },
       tabId: {type: String},
@@ -18,31 +19,32 @@ export class LoadingAnimation extends LitElement {
 
   static get styles() {
     return css`
-      .loading-bar {
+
+    .loading-bar {
         height: 50px;
         width: 100%;
         background: linear-gradient(to right, orange, yellow, red);
         transition: width 0.1s linear;
-      }
-
-      .loading-time {
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      padding-right: 10px;
     }
 
-        .loading-bar-container {
-            height: 50px;
-            width: 100%;
-            position: relative;
-        }
-    `;
-  }
+    .loading-time {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        padding-right: 10px;
+    }
+        
+    .loading-bar-container {
+        height: 50px;
+        width: 100%;
+        position: relative;
+    }
+`;
+}
 
   constructor() {
     super();
@@ -61,7 +63,6 @@ export class LoadingAnimation extends LitElement {
 
   firstUpdated() {
     console.log('First Updated Time: ',this.time)
-    this.startLoading();
   }
 
   updated(changedProperties) {
@@ -71,24 +72,20 @@ export class LoadingAnimation extends LitElement {
     }
   }
 
+
   startLoading() {
-    // calculate the increment such that the progress bar fills up in the specified time
-    const increment = 100 / (this.time * 10);
-  
-    console.log('Interval Time:', this.time * 10); // add this
-    console.log('Increment:', increment); // add this
-  
+    const increment = 100 / (this.tabTime * 10);
+
     this.intervalId = setInterval(() => {
       this.progress += increment;
-      this.seconds += 0.1; // update the seconds
+      this.seconds += 0.1;
       
-      // Stop loading when it hits the maximum progress
-      if (this.progress >= 100) {
-        this.progress = 100;
-        this.seconds = this.time; // set seconds to the maximum time
+      if (this.progress >= (this.time / this.tabTime) * 100 || this.seconds >= this.time) {
+        this.progress = (this.time / this.tabTime) * 100;
+        this.seconds = this.time;
         this.stopLoading();
       }
-  
+
       this.requestUpdate();
     }, 100);
   }
