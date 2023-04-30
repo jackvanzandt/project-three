@@ -61,7 +61,7 @@ p {
 }
 .intro-text {
   text-align: center;
-  font-size: 18px;
+  font-size: 12px;
   color:#6b6b6b;
 }
 .tablinks {
