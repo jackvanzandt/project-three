@@ -14,6 +14,7 @@ export class LoadingAnimation extends LitElement {
       intervalId: { type: Object },
       tabId: {type: String},
       seconds: {type: Number},
+      maxTime: {type: Number}
     };
   }
 
@@ -22,10 +23,12 @@ export class LoadingAnimation extends LitElement {
 
     .loading-bar {
         height: 50px;
-        width: 100%;
-        background: linear-gradient(to right, orange, yellow, red);
+        background: linear-gradient(to right, yellow, orange);
         transition: width 0.1s linear;
-    }
+        border-radius: 5px;
+        z-index: 1;
+        position: relative;
+      }
 
     .loading-time {
         position: absolute;
@@ -39,10 +42,22 @@ export class LoadingAnimation extends LitElement {
     }
         
     .loading-bar-container {
-        height: 50px;
+        height: 60px;
         width: 100%;
-        position: relative;
+        padding: 5px;
     }
+
+    .loading-endpoint {
+        position: absolute;
+        height: 50px;
+        background: rgba(128, 128, 128, 0.3);
+        border-radius: 5px;
+        left: 5px;
+        top: 5px;
+        bottom: 5px;
+        width: auto;
+        
+      }
 `;
 }
 
@@ -55,9 +70,11 @@ export class LoadingAnimation extends LitElement {
   }
 
   render() {
+    const endpointWidth = ((this.tabTime - this.time) / this.tabTime) * 100;
     return html`
-      <div class="loading-bar" style="width: ${this.progress * 0.9}%;"></div>
-    <div class="loading-time">${this.seconds.toFixed(1)}s</div>
+      <div class="loading-bar" style="width: ${this.progress}%;"></div>
+      <div class="loading-endpoint" style="right: ${endpointWidth}%;"></div>
+      <div class="loading-time">${this.formatTime(this.seconds)}</div>
     `;
   }
 
@@ -103,6 +120,19 @@ export class LoadingAnimation extends LitElement {
     this.stopLoading();
     this.progress = 0;
     this.seconds = 0;
+  }
+
+
+displayTime() {
+    if (this.time < 1) {
+      return `${(this.seconds * 1000).toFixed(0)} ms`;
+    }
+        return `${this.seconds.toFixed(1)} s`;
+  }
+
+
+formatTime(seconds) {
+    return seconds < 1 ? `${(seconds * 1000).toFixed(0)} ms` : `${seconds.toFixed(2)} s`;
   }
 }
 

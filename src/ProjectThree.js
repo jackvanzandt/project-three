@@ -80,10 +80,6 @@ p {
   overflow: hidden;
     }
 
-.tabcontent {
-  display: none;
-  }
-
 .tablinks.active {
   color: orange;
   border-bottom: 2px solid orange;
